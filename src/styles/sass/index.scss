@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans');
+*{
+    overflow: hidden;
+}
 $containerBg:#F1F1F1;
-
+$startLightGreen:#009688;
+$upHeight:50px;
 .container{
     position: absolute;
     width: 100%;
@@ -9,9 +13,101 @@ $containerBg:#F1F1F1;
 }
 #root{
     position: relative;
-    top:25%;
-    min-height: 300px;
+    top:0%;
+    height: 320px;
     width: 50%;
-    height: 30%;
     left: 25%;
+}
+.calendarDiv{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    background-color: $startLightGreen;
+    display: inline-flex;
+    >div{
+        height: 100%;
+        width: 50%;
+        .dayNumClass{
+            padding: 0;
+            background-color:#00796b;
+            color:white;
+            height:$upHeight;
+            >h2{
+                margin: auto;
+                font-family: "Open Sans";
+            }
+        }
+        .dayClass{
+            color:white; 
+            text-align: center;
+            padding:0;
+            width: 100%;
+            margin:auto;
+            margin-top:-12px;
+            >h1{
+                margin:0;
+                font-family: "Lato";
+                font-size:140px;
+                height: 170px;
+            }
+            >div{
+                 font-family: "Open Sans";
+                 font-size: 26px;
+                 padding: 7px; 
+                 padding-bottom: 16px;
+            }
+            .dayClass_year{
+                color:#F4F4F4;
+            }
+        }
+        >div{
+            height: 100%;
+            width: 100%;
+            background-color: $startLightGreen;
+        }
+        .dayNumClass2{
+            display: inline-flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            width: 100%;
+            background-color: white;
+            color:#393939;
+        }
+    }
+    .calendarTable{
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        table{
+            border: 0;
+            background-color: white;
+            width:100.5%;
+            padding:0;
+            margin-top:-1px;
+            >thead th{
+                padding-left:0;
+                padding-right:0;
+                text-align: center !important;
+                /*height:10px;*/
+            }
+            >tbody>tr{
+                height: 40px;
+            }
+            >tbody td{
+                height: 0;
+                border:0;
+                padding:5px 0 5px 0;
+                >div{
+                    width: 30px;
+                    height: 30px;
+                    text-align: center;
+                    margin: auto;                        
+                }
+                .activeDate{
+                    background-color: $startLightGreen;
+                }
+            }
+        }
+    }
 }
