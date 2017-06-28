@@ -75,6 +75,7 @@ $upHeight:50px;
             color:#393939;
         }
     }
+    .tableNums{padding-right: 3px;}
     .calendarTable{
         display: flex;
         flex-direction: column;
@@ -97,14 +98,17 @@ $upHeight:50px;
             >tbody td{
                 height: 0;
                 border:0;
-                padding:5px 0 5px 0;
+                padding:0px 0 0px 0;
+                width: 14.29%;
                 >div{
-                    width: 30px;
-                    height: 30px;
                     text-align: center;
-                    margin: auto;                        
+                    margin: auto; 
+                    padding: 10px;
+                    width: 20px;
                 }
                 .activeDate{
+                    border-radius: 100%;
+                    color:white;
                     background-color: $startLightGreen;
                 }
             }

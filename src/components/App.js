@@ -7,21 +7,43 @@ const { Card, CardTitle, CardText } = MDL;
 const { IconButton } = MDL;
 class App extends React.Component {
 	render() {
-		let days = [
-			{ day0: <div>1</div>, day1: <div>1</div>, day2:<div>1</div>, day3:<div>1</div>, day4: <div>1</div>, day5: <div>1</div>, day6:<div>1</div> },
-			{ day0: <div>1</div>, day1: <div className="activeDate">1</div>, day2:<div>1</div>, day3:<div>1</div>, day4: <div>1</div>, day5: <div>1</div>, day6:<div>1</div> },
-			{ day0: <div>1</div>, day1: <div>1</div>, day2:<div>1</div>, day3:<div>1</div>, day4: <div>1</div>, day5: <div>1</div>, day6:<div>1</div> },
-			{ day0: <div>1</div>, day1: <div>1</div>, day2:<div>1</div>, day3:<div>1</div>, day4: <div>1</div>, day5: <div>1</div>, day6:<div>1</div> },
-			{ day0: <div>1</div>, day1: <div>1</div>, day2:<div>1</div>, day3:<div>1</div>, day4: <div>1</div>, day5: <div>1</div>, day6:<div>1</div> },
-		];
+		let now = new Date();
+		let nowWeek = this.weeks[now.getDay()];
+		let nowMonthNum = now.getMonth();
+		let nowMonth = this.month[nowMonthNum];
+		let nowSmallMonth = this.smallMonth[nowMonthNum];
+		let nowYear = now.getFullYear();
+		let nowDay = now.getDate();
+
+		let daysInNowMonth = 32 - new Date(nowYear, nowMonthNum, 32).getDate();
+		let strCount = Math.ceil(daysInNowMonth / 7);
+
+		let days = [{}, {}, {}, {}, {}];
+		let d = new Date(nowYear, nowMonthNum);
+		function getDay(date) {
+			let day = date.getDay();
+			return day === 0 ? 6 : day - 1;
+		}
+		let startD = getDay(d);
+		for (let i = 0; i < strCount; i++) {
+			let ds = days[i];
+			for (let day = startD; day < 7; day++) {
+				let dDate = d.getDate();
+				if (d.getMonth() === nowMonthNum) {
+					ds["day" + day] = <div className={dDate===nowDay?"activeDate":""}>{dDate}</div>;
+				}
+				d.setDate(dDate + 1);
+			}
+			startD = 0;
+		}
 		return <div className="calendarDiv">
 			<div>
 				<Card>
-					<CardTitle className="dayNumClass">Понедельник</CardTitle>
+					<CardTitle className="dayNumClass">{nowWeek}</CardTitle>
 					<CardText className="dayClass">
-						<h1>19</h1>
-						<div className="dayClass_month">ЯНВ</div>
-						<div className="dayClass_year">2017</div>
+						<h1>{nowDay}</h1>
+						<div className="dayClass_month">{nowSmallMonth}</div>
+						<div className="dayClass_year">{nowYear}</div>
 					</CardText>
 				</Card>
 			</div>
@@ -31,7 +53,7 @@ class App extends React.Component {
 						<div>
 							<IconButton ripple name="keyboard_arrow_left" />
 						</div>
-						<div>Январь 2017</div>
+						<div>{nowMonth} {nowYear}</div>
 						<div>
 							<IconButton ripple name="keyboard_arrow_right" />
 						</div>
@@ -52,6 +74,10 @@ class App extends React.Component {
 		</div>
 	}
 }
+App.prototype.month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Декабрь"];
+App.prototype.smallMonth = ["ЯНВ", "ФЕВ", "МРТ", "АПР", "МАЙ", "ИЮН", "ИЮЛ", "АВГ", "СЕН", "ОКТ", "НБР", "ДЕК"];
+App.prototype.weeks = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+
 
 
 
