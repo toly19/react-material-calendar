@@ -62,7 +62,7 @@ module.exports = function (env) {
 			devserver(),
 			sass(),
 			css(),
-			{ devtool: "cheap-eval-source-map" }
+			{ devtool: "eval-source-map" }
 		])
 	}
 }
